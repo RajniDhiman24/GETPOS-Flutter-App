@@ -24,7 +24,7 @@ class LongButton extends StatefulWidget {
       required this.isAmountAndItemsVisible,
       required this.buttonTitle,
       this.totalAmount,
-      this.isTab=false,
+      this.isTab = false,
       this.totalItems,
       this.onTap})
       : super(key: key);
@@ -55,13 +55,16 @@ class _LongButtonState extends State<LongButton> {
                                   ],
                                 colors: [
                                     AppColors.getPrimary(),
-                                   AppColors.getPrimary().withOpacity(0.9)
+                                    AppColors.getPrimary().withOpacity(0.9)
                                   ])
-                            :  LinearGradient(
-                                begin:const Alignment(0.0, 0.5),
-                                end:const Alignment(0.5, 0.5),
+                            : LinearGradient(
+                                begin: const Alignment(0.0, 0.5),
+                                end: const Alignment(0.5, 0.5),
                                 stops: const [0.0, 0.0],
-                                colors: [AppColors.getPrimary(), AppColors.getPrimary()],
+                                colors: [
+                                  AppColors.getPrimary(),
+                                  AppColors.getPrimary()
+                                ],
                               )),
                     child: Padding(
                       padding: mediumPaddingAll(),
@@ -109,8 +112,10 @@ class _LongButtonState extends State<LongButton> {
                                 onPressed: () => widget.onTap!(),
                                 child: Text(widget.buttonTitle,
                                     style: getTextStyle(
-                                      fontSize:widget.isTab? MEDIUM_PLUS_FONT_SIZE:MEDIUM_MINUS_FONT_SIZE,
-                                      fontWeight: FontWeight.bold,
+                                      fontSize: widget.isTab
+                                          ? MEDIUM_PLUS_FONT_SIZE
+                                          : MEDIUM_MINUS_FONT_SIZE,
+                                      fontWeight: FontWeight.w700,
                                       color: AppColors.fontWhiteColor,
                                     ))),
                           )

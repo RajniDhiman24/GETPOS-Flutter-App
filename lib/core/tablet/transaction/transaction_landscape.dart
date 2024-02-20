@@ -32,7 +32,7 @@ class _TransactionLandscapeState extends State<TransactionLandscape> {
   // bool isCustomersFound = true;
 
   @override
-  void initState() {  
+  void initState() {
     super.initState();
     searchCtrl = TextEditingController();
     _scrollController.addListener(_onScroll);
@@ -40,7 +40,8 @@ class _TransactionLandscapeState extends State<TransactionLandscape> {
 
   @override
   void dispose() {
-    searchCtrl.dispose();   _focusNode.dispose();
+    searchCtrl.dispose();
+    _focusNode.dispose();
     _scrollController
       ..removeListener(_onScroll)
       ..dispose();
@@ -66,81 +67,84 @@ class _TransactionLandscapeState extends State<TransactionLandscape> {
     final currentScroll = _scrollController.offset;
     return currentScroll >= (maxScroll * 0.8);
   }
-  final FocusNode _focusNode = FocusNode();
 
+  final FocusNode _focusNode = FocusNode();
 
   void _handleTap() {
     if (_focusNode.hasFocus) {
       _focusNode.unfocus();
     }
   }
+
   @override
   Widget build(BuildContext context) {
-    return GestureDetector (onTap: _handleTap,child: Column(
-      children: [
-        hightSpacer10,
-          TitleAndSearchBar(
-          inputFormatter: [FilteringTextInputFormatter.digitsOnly],
-          parkedOrderVisible: true,
-          title: "Orders History",
-          onSubmit: (text) {
-            // context
-            //     .read<TransactionBloc>()
-            //     .add(TransactionSearched(text, true));
-            if (text.isEmpty) {
-              context.read<TransactionBloc>().state.orders.clear();
-              context.read<TransactionBloc>().add(TransactionFetched());
-            } else {
-              context
-                  .read<TransactionBloc>()
-                  .add(TransactionSearched(text, true));
-            }
-          },
-          onTextChanged: (text) {
-            //context.read<TransactionBloc>().add(TransactionSearched(val, true));
-            if (text.isEmpty) {
-              context.read<TransactionBloc>().state.orders.clear();
-              context.read<TransactionBloc>().add(TransactionFetched());
-            } else {
-              context
-                  .read<TransactionBloc>()
-                  .add(TransactionSearched(text, true));
-            }
-          },
-          parkOrderClicked: () {
-            widget.selectedView.value = "Parked Order";
+    return GestureDetector(
+        onTap: _handleTap,
+        child: Column(
+          children: [
+            hightSpacer10,
+            TitleAndSearchBar(
+              inputFormatter: [FilteringTextInputFormatter.digitsOnly],
+              parkedOrderVisible: true,
+              title: "Orders History",
+              onSubmit: (text) {
+                // context
+                //     .read<TransactionBloc>()
+                //     .add(TransactionSearched(text, true));
+                if (text.isEmpty) {
+                  context.read<TransactionBloc>().state.orders.clear();
+                  context.read<TransactionBloc>().add(TransactionFetched());
+                } else {
+                  context
+                      .read<TransactionBloc>()
+                      .add(TransactionSearched(text, true));
+                }
+              },
+              onTextChanged: (text) {
+                //context.read<TransactionBloc>().add(TransactionSearched(val, true));
+                if (text.isEmpty) {
+                  context.read<TransactionBloc>().state.orders.clear();
+                  context.read<TransactionBloc>().add(TransactionFetched());
+                } else {
+                  context
+                      .read<TransactionBloc>()
+                      .add(TransactionSearched(text, true));
+                }
+              },
+              parkOrderClicked: () {
+                widget.selectedView.value = "Parked Order";
 
-            // widget.selectedTab = "";
-            debugPrint("parked order clicked");
-          },
-          searchCtrl: searchCtrl,
-          searchHint: "Enter Customer mobile",
-        ),
-        hightSpacer20,
-        BlocBuilder<TransactionBloc, TransactionState>(
-            builder: (context, state) {
-          switch (state.status) {
-            case TransactionStatus.failure:
-              return const Center(
-                child: Text("Failed to fetch Transactions"),
-              );
-            case TransactionStatus.success:
-              if (state.orders.isEmpty) {
-                return const Center(
-                  child: Text("No data available..."),
-                );
+                // widget.selectedTab = "";
+                debugPrint("parked order clicked");
+              },
+              searchCtrl: searchCtrl,
+              searchHint: "Enter Customer mobile",
+            ),
+            hightSpacer20,
+            BlocBuilder<TransactionBloc, TransactionState>(
+                builder: (context, state) {
+              switch (state.status) {
+                case TransactionStatus.failure:
+                  return const Center(
+                    child: Text("Failed to fetch Transactions"),
+                  );
+                case TransactionStatus.success:
+                  if (state.orders.isEmpty) {
+                    return const Center(
+                      child: Text("No data available..."),
+                    );
+                  }
+                  return Expanded(
+                    child: transactionsGrid(state),
+                  );
+                default:
+                  return const Center(
+                    child: BottomLoader(),
+                  );
               }
-              return Expanded(
-                child: transactionsGrid(state),
-              );
-            default:
-              return const Center(
-                child: BottomLoader(),
-              );
-          }
-        }),
-      ],
-    ));
+            }),
+          ],
+        ));
   }
 
   Widget transactionsGrid(TransactionState state) {

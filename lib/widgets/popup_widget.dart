@@ -45,8 +45,7 @@ class _SimplePopupState extends State<SimplePopup> {
   Widget build(BuildContext context) {
     return Container(
         height: 100,
-        margin:
-            Platform.isWindows ? morePaddingAll(x: 250) : morePaddingAll(x: 20),
+        margin: morePaddingAll(x: 20),
         child: Center(
             child: Card(
           shape: cardBorderShape(),
@@ -113,55 +112,4 @@ class _SimplePopupState extends State<SimplePopup> {
           ),
         )));
   }
-}
-
-Future<void> deleteCustomer() async {
-  box = await Hive.openBox<Customer>(CUSTOMER_BOX);
-  await box!.clear();
-  box!.close();
-}
-
-Future<void> deleteHubManager() async {
-  box = await Hive.openBox<HubManager>(HUB_MANAGER_BOX);
-  await box!.clear();
-  box!.close();
-}
-
-Future<void> deleteProduct() async {
-  box = await Hive.openBox<Product>(PRODUCT_BOX);
-  await box!.clear();
-  box!.close();
-}
-
-Future<void> deleteSales() async {
-  box = await Hive.openBox<SaleOrder>(SALE_ORDER_BOX);
-  await box!.clear();
-  box!.close();
-}
-
-Future<void> deleteParkedOrder() async {
-  box = await Hive.openBox<ParkOrder>(PARKED_ORDER_BOX);
-  await box!.clear();
-  box!.close();
-}
-
-
-Future<void> deleteCategory() async {
-  box = await Hive.openBox<Category>(CATEGORY_BOX);
-  await box!.clear();
-  box!.close();
-}
-
-
-
-Future<void> deleteOrderItem() async {
-  box = await Hive.openBox<OrderItem>(ORDER_ITEM_BOX);
-  await box!.clear();
-  box!.close();
-}
-
-Future<void> deleteURL() async {
-  box = await Hive.openBox<String>(URL_BOX);
-  await box!.clear();
-  box!.close();
 }

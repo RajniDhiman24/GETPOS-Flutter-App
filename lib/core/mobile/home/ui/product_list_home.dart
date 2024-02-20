@@ -466,7 +466,6 @@ class _ProductListHomeState extends State<ProductListHome> {
                   child: FloatingActionButton(
                       heroTag: 'finance',
                       onPressed: (() async {
-                    
                         await Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -500,7 +499,6 @@ class _ProductListHomeState extends State<ProductListHome> {
                   child: FloatingActionButton(
                       heroTag: 'account',
                       onPressed: (() async {
-                    
                         await Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -535,7 +533,6 @@ class _ProductListHomeState extends State<ProductListHome> {
                   child: FloatingActionButton(
                       heroTag: 'transactions',
                       onPressed: (() async {
-                   
                         await Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -571,7 +568,6 @@ class _ProductListHomeState extends State<ProductListHome> {
                   child: FloatingActionButton(
                       heroTag: 'customers',
                       onPressed: (() async {
-                     
                         await Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -636,7 +632,6 @@ class _ProductListHomeState extends State<ProductListHome> {
                   child: FloatingActionButton(
                       heroTag: 'create order',
                       onPressed: (() async {
-                    
                         await Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -962,16 +957,16 @@ class _ProductListHomeState extends State<ProductListHome> {
     // await DBPreferences().getPreference(Manager);
   }
 
-  verify() async {
-    CommanResponse res = await VerificationUrl.checkAppStatus();
-    if (res.message == true) {
-      _getManagerName();
-      getProducts();
-    } else {
-      Helper.showPopup(context, "Please update your app to latest version",
-          barrierDismissible: true);
-    }
-  }
+  // verify() async {
+  //   CommanResponse res = await VerificationUrl.checkAppStatus();
+  //   if (res.message == true) {
+  //     _getManagerName();
+  //     getProducts();
+  //   } else {
+  //     Helper.showPopup(context, "Please update your app to latest version",
+  //         barrierDismissible: true);
+  //   }
+  // }
 
   _openItemDetailDialog(BuildContext context, OrderItem product) async {
     product.orderedPrice = product.price;

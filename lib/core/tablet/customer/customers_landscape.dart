@@ -24,7 +24,7 @@ class _CustomersLandscapeState extends State<CustomersLandscape> {
   bool isCustomersFound = true;
 
   @override
-  void initState() {   verify();
+  void initState() {   
     searchCtrl = TextEditingController();
     super.initState();
     getCustomersFromDB(0);
@@ -137,12 +137,12 @@ class _CustomersLandscapeState extends State<CustomersLandscape> {
 
     setState(() {});
   }
-  verify() async {
-    CommanResponse res = await VerificationUrl.checkAppStatus();
-    if (res.message == true) {
-    } else {
-      Helper.showPopup(context, "Please update your app to latest version",
-          barrierDismissible: true);
-    }
-  }
+  // verify() async {
+  //   CommanResponse res = await VerificationUrl.checkAppStatus();
+  //   if (res.message == true) {
+  //   } else {
+  //     Helper.showPopup(context, "Please update your app to latest version",
+  //         barrierDismissible: true);
+  //   }
+  // }
 }

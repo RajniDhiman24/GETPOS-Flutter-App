@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 // import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -28,8 +29,6 @@ class LogoutPopupView extends StatefulWidget {
 class _LogoutPopupViewState extends State<LogoutPopupView> {
   // static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
   //  ShowMToast toast = ShowMToast(navigatorKey.currentContext!);
-
-
 
   /// LOGIN BUTTON
   Widget get cancelBtnWidget => SizedBox(
@@ -295,7 +294,7 @@ class _LogoutPopupViewState extends State<LogoutPopupView> {
         }
       } else {
         if (isInternetAvailable) {
-          if (!mounted) return;
+          // if (!mounted) return;
           Navigator.pop(context);
           // if (Platform.isWindows) {
           //   toast.errorToast(
@@ -317,10 +316,12 @@ class _LogoutPopupViewState extends State<LogoutPopupView> {
             //       message: 'Background Sync completed',
             //       alignment: Alignment.topCenter);
             // } else {
-            LocalNotificationService().showNotification(
-                id: 1,
-                title: 'Background Sync',
-                body: 'Background Sync completed.');
+            // if (!Platform.isWindows) {
+              LocalNotificationService().showNotification(
+                  id: 1,
+                  title: 'Background Sync',
+                  body: 'Background Sync completed.');
+            // }
             // }
 
             // await Navigator.pushReplacement(

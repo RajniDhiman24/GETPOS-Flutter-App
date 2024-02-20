@@ -162,11 +162,12 @@ class _LoginState extends State<Login> {
           if (widget.isUserLoggedIn) {
             await ProductsService().getCategoryProduct();
           }
-          Helper.hideLoader(context);
+          // Helper.hideLoader(context);
           // Start isolate with background processing and pass the receivePort
-         await useIsolate(isUserLoggedIn: true);
+          await useIsolate(isUserLoggedIn: true);
           // if (isSuccess) {
           // Once the signal is received, navigate to ProductListHome
+          Helper.hideLoader(context);
           Navigator.push(
               context,
               MaterialPageRoute(
@@ -257,7 +258,6 @@ class _LoginState extends State<Login> {
               txtCtrl: _passCtrl,
               hintText: PASSWORD_HINT,
               password: true,
-              
             ),
           ],
         ),
@@ -334,16 +334,14 @@ class _LoginState extends State<Login> {
                 TextSpan(
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
-                     
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => WebViewScreen(
-                                        topicTypes:
-                                            TopicTypes.TERMS_AND_CONDITIONS,
-                                        apiUrl: "https://$url/api/",
-                                      )));
-                     
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => WebViewScreen(
+                                      topicTypes:
+                                          TopicTypes.TERMS_AND_CONDITIONS,
+                                      apiUrl: "https://$url/api/",
+                                    )));
                       },
                     text: TERMS_CONDITIONS,
                     style: getTextStyle(
@@ -359,15 +357,13 @@ class _LoginState extends State<Login> {
                 TextSpan(
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
-                    
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => WebViewScreen(
-                                        topicTypes: TopicTypes.PRIVACY_POLICY,
-                                        apiUrl: "https://$url/api/",
-                                      )));
-                      
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => WebViewScreen(
+                                      topicTypes: TopicTypes.PRIVACY_POLICY,
+                                      apiUrl: "https://$url/api/",
+                                    )));
                       },
                     text: PRIVACY_POLICY,
                     style: getTextStyle(
@@ -435,7 +431,6 @@ class _LoginState extends State<Login> {
 // while changing instance
       SyncHelper().logoutFlow();
 
-    
       await Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => const ThemeChange()),

@@ -181,7 +181,7 @@ class _MyAccountState extends State<MyAccount> {
     //       body: 'Please wait Background sync work in progess');
     // }
     else {
-      if (!mounted) return;
+      // if (!mounted) return;
 
       ///there are offline orders
       ///and internet is on
@@ -231,7 +231,13 @@ class _MyAccountState extends State<MyAccount> {
               body: 'Background Sync completed.');
 
           // ignore: use_build_context_synchronously
-          await fetchMasterAndDeleteTransaction();
+          var res = await Helper.showConfirmationPopup(
+              context, LOGOUT_QUESTION, OPTION_YES,
+              hasCancelAction: true);
+          if (res != OPTION_CANCEL.toLowerCase()) {
+            // ignore: use_build_context_synchronously
+            await fetchMasterAndDeleteTransaction();
+          }
           // await Navigator.pushReplacement(
           //   context,
           //   MaterialPageRoute(

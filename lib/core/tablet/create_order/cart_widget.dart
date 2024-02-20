@@ -1016,20 +1016,18 @@ class _CartWidgetState extends State<CartWidget> {
 
     if (!mounted) return;
 
-setState(() {
-  
-
-    //taxAmountMap contains the accumulated tax amounts for each tax type
-    taxDetailsList = taxAmountMap.entries
-        .map((entry) => {
-              'tax_type': entry.key,
-              //'rate': entry.value / subTotalAmount * 100, // Calculate rate based on accumulated tax amount
-              'tax_amount': entry.value,
-            })
-        .toList();
-   // setState(() {});
-    grandTotal = totalAmount! + totalTaxAmount;
-    log('Grand Total:: $grandTotal');
+    setState(() {
+      //taxAmountMap contains the accumulated tax amounts for each tax type
+      taxDetailsList = taxAmountMap.entries
+          .map((entry) => {
+                'tax_type': entry.key,
+                //'rate': entry.value / subTotalAmount * 100, // Calculate rate based on accumulated tax amount
+                'tax_amount': entry.value,
+              })
+          .toList();
+      // setState(() {});
+      grandTotal = totalAmount! + totalTaxAmount;
+      log('Grand Total:: $grandTotal');
     });
   }
 
